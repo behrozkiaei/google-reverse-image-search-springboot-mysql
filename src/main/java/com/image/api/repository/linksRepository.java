@@ -1,15 +1,14 @@
 package com.image.api.repository;
 
-import com.image.api.entity.Image;
 import com.image.api.entity.Links;
+import com.image.api.model.LinksLists;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface ImageRepository extends JpaRepository<Image,Long> {
+public interface linksRepository extends JpaRepository<Links, Long> {
 
-
+    @Query(" FROM Links WHERE image_id = ?1")
+    List<Links> findByImageId(String id);
 }

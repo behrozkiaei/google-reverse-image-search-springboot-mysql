@@ -29,7 +29,7 @@ public class Links {
 
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="imageId")
     private Image image;
 
@@ -67,9 +67,9 @@ public class Links {
         return title;
     }
 
-    public Image getImage() {
-        return image;
-    }
+//    public Image getImage() {
+//        return image;
+//    }
 
     public void setImage(Image image) {
         this.image = image;

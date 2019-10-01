@@ -4,6 +4,7 @@ import com.image.api.config.ResourceNotFoundException;
 import com.image.api.entity.Image;
 import com.image.api.entity.Links;
 import com.image.api.repository.ImageRepository;
+import com.image.api.repository.linksRepository;
 import com.image.api.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -19,6 +21,9 @@ public class ImageController {
 
     @Autowired
     ImageRepository imageRepository;
+
+    @Autowired
+    linksRepository linksRepositoryC;
 
     @Autowired
     ImageService iamgeService;
@@ -31,15 +36,17 @@ public class ImageController {
 
     // Create a new Note
     @PostMapping("/image")
-    public @Valid Image createNote(@Valid @RequestBody Image i) throws IOException {
+    public Image createNote(@Valid @RequestBody Image i) throws IOException {
 
 
         String url = i.getImageName();
         Set<Links> l =   iamgeService.getImageByUrl(i.getImageName(),i);
         Set<Links> b =   iamgeService.getImageByUrlForYandex(i.getImageName(),i);
-         l.addAll(b);
+        l.addAll(b);
         i.setLinks(l);
         return imageRepository.save(i);
+
+
     }
 
     // Get a Single Note

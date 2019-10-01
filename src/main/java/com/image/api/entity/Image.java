@@ -42,7 +42,9 @@ public class Image {
     private Date updatedAt;
 
 
-    @OneToMany(mappedBy="image",cascade = CascadeType.ALL)
+
+
+    @OneToMany(mappedBy="image",cascade=CascadeType.ALL, fetch=FetchType.LAZY )
     private Set<Links> linksSet;
 
 
@@ -105,5 +107,8 @@ public class Image {
 
     public void setLinks(Set<Links> links) {
         this.linksSet = links;
+    }
+    public Set<Links> getLinksSet() {
+        return linksSet;
     }
 }

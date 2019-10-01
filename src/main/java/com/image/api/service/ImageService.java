@@ -27,8 +27,8 @@ public class ImageService {
 
     @Autowired
     ContentRepository contentRepository;
-    public Set<Links> getImageByUrl(String urlTemp,Image image) throws IOException {
-       String url = "http://cactoos.ir/download_ir_files/"+urlTemp;
+    public Set<Links> getImageByUrl(String url,Image image) throws IOException {
+
         Document res = Jsoup.connect("https://images.google.com/searchbyimage?image_url="+url+"&encoded_image=&image_content=&filename=&hl=en&num=50&lr=lang_en").userAgent(USER_AGENT).get();
         if(res.toString().contains("Pages that include matching images")){
             image.setImageIncludedGoogle(true);
@@ -57,8 +57,8 @@ public class ImageService {
 
     }
     //    getImageByUrlForYandex
-    public Set<Links> getImageByUrlForYandex(String urlTemp,Image image) throws IOException {
-        String url = "http://cactoos.ir/download_ir_files/"+urlTemp;
+    public Set<Links> getImageByUrlForYandex(String url,Image image) throws IOException {
+
         Document res = Jsoup.connect("https://yandex.com/images/search?source=collections&&url="+url+"&rpt=imageview").userAgent(USER_AGENT).get();
             if(res.toString().contains("The same picture was not found")){
              image.setImageIncludedYandex(false);
